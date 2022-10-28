@@ -1,0 +1,73 @@
+﻿@model IEnumerable<GestionTienda.Models.Categoria>//para poder acceder a los modelos
+@{
+    ViewData["Title"] = "Lista de categorias";
+    //Layout = "~/Views/Shared/_Layout.cshtml";//accediendo al Layout
+}
+<div class="row">
+    <div class="col-4">
+        <h3>Lista de categorias</h3>
+    </div>
+    <div class="col-3">
+        <a asp-action="Crear" class="btn btn-primary form-control">Crear categoria</a>
+    </div>
+</div>
+<div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-striped border">
+            <tr>
+                <th>Nombre de categoria</th>
+                <th>Estado</th>
+                <th>Fecha de creacion</th>
+                <th></th>
+            </tr>
+            @foreach (var categoria in Model)
+            {
+                <tr>
+                    <td>@categoria.Nombre</td><!--acceder los campos-->
+                    <td>@categoria.Activo</td>
+                    <td>@categoria.FechaCreacion</td>
+                    <td>
+                        <a class="btn btn-primary text-white" asp-action="Editar" asp-route-id="@categoria.Categoria_Id">Editar</a>
+                        <a class="btn btn-danger text-white" asp-action="Borrar" asp-route-id="@categoria.Categoria_Id"
+                   onclick="return confirm('Esta seguro que quiere borrar la categoria?')">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No hay categorias</p>
+    }
+</div>
+
+
+
+<!--
+
+    <div class="col-3">
+        <a asp-action="FiltrandoPorFecha" class="btn btn-secondary form-control">Filtrando por fecha</a>
+        <br />
+        <br />
+        <a asp-action="OrdenarPorFechaDescendentemente" class="btn btn-secondary form-control">Ordenar descendentemente por fecha</a>
+        <br />
+        <br />
+        <a asp-action="FiltrarPorColumna" class="btn btn-secondary form-control">Filtrar por la columna nombre</a>
+        <br />
+        <br />
+        <a asp-action="AgrupandoPorActivo" class="btn btn-secondary form-control">Agrupando por la columna Activo</a>
+        <br />
+        <br />
+        <a asp-action="OrdenarPorFechaDescendentemente" class="btn btn-secondary form-control">Ordenar descendentemente por fecha</a>
+        <br />
+        <br />
+        <a asp-action="Paginacion" class="btn btn-secondary form-control">Paginando registros</a>
+        <br />
+        <br />
+        <a asp-action="ConsultaConvencional" class="btn btn-secondary form-control">Consulta SQL convencional</a>
+        <br />
+        <br />
+        <a asp-action="OrdenarPorFechaDescendentemente" class="btn btn-secondary form-control">Ordenar descendentemente por fecha</a>
+</div>
+-->
